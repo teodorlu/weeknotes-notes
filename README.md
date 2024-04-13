@@ -41,3 +41,25 @@ Operations:
 "multi-editing and groups?"
 Let's not start there.
 `garden groups` looks interesting, but let's not make this too hard on ourselves.
+
+## Storage quotas
+
+Current quotas seem to be:
+
+1. Max 10 GB per user
+2. Max 10 projects per user
+
+(That should be plenty for my use case)
+
+Here's my current usage:
+
+``` sh
+$ garden list
+```
+
+|          name |  status | git-rev |                               url |                    deployed-at | deployed-by |
+|---------------+---------+---------+-----------------------------------+--------------------------------+-------------|
+| garden-teodor | running | 1097d72 | https://garden-teodor.apps.garden | April 12, 2024 at 4:06:54 PM Z |    teodorlu |
+
+Running projects limit: 1/10
+Used storage quota: 0MB/10GB (0.0%)
