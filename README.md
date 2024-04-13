@@ -57,9 +57,7 @@ Here's my current usage:
 $ garden list
 ```
 
-|          name |  status | git-rev |                               url |                    deployed-at | deployed-by |
-|---------------+---------+---------+-----------------------------------+--------------------------------+-------------|
-| garden-teodor | running | 1097d72 | https://garden-teodor.apps.garden | April 12, 2024 at 4:06:54 PM Z |    teodorlu |
+PUT TABLE HERE
 
 Running projects limit: 1/10
 Used storage quota: 0MB/10GB (0.0%)
