@@ -28,6 +28,7 @@ that assumption is correct in practice.
 :PROPERTIES:
 :CUSTOM_ID: multi-user-data-model
 :END:
+
 Rough idea:
 
 1. lean on garden's login system
