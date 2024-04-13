@@ -2,6 +2,7 @@
 :PROPERTIES:
 :CUSTOM_ID: how-hard-can-it-be-to-roll-my-own-note-taking-system
 :END:
+
 I like to build the tools I use. I also like my website,
 [[https://play.teod.eu/][play.teod.eu]].
 
@@ -48,6 +49,7 @@ interesting, but let's not make this too hard on ourselves.
 :PROPERTIES:
 :CUSTOM_ID: storage-quotas
 :END:
+
 Current quotas seem to be:
 
 1. Max 10 GB per user
