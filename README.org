@@ -78,3 +78,15 @@ There are templates for garden:
 Per 2024-04-13, I've tried the default template.
 It spits out an httpkit application that demonstrates most/all of garden's features.
 I haven't tried the Clerk template.
+* 2024-04-14
+** I Know What To Do!
+I Will Create A Note System Specifically For Writing Weeknotes!!!!
+
+:grin:
+
+this is perfect!
+
+1. It's what I need
+2. It's narrow
+
+Perfect!
