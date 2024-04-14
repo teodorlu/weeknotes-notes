@@ -1,0 +1,4 @@
+{:deps {com.lambdaisland/launchpad {:mvn/version "0.28.129-alpha"}}
+ :tasks
+ {
+ }}
