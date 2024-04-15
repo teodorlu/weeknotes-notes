@@ -1,7 +1,10 @@
 (ns teodorlu.weeknotes-notes
   (:require
+   [babashka.fs :as fs]
+   [babashka.process :refer [shell]]
    [clj-reload.core :as clj-reload]
    [clj-simple-router.core :as clj-simple-router]
+   [clojure.string :as str]
    [nextjournal.garden-email :as garden-email]
    [nextjournal.garden-id :as garden-id]
    [org.httpkit.server :as server]
@@ -43,22 +46,34 @@
                                   (merge {:legacy-return-value? false
                                           :host "0.0.0.0"
                                           :port 7777}
-                                         opts))]
-    (println (format "Server started: http://localhost:%s"
-                     (server/server-port server)))
+                                         opts))
+        local-url (format "http://localhost:%s" (server/server-port server))]
+    (println "Server started:" local-url)
+    (when (:browse? opts)
+      (let [browser (System/getenv "BROWSER")]
+        (when (:browse? opts)
+          (cond (not (str/blank? browser)) (shell browser local-url)
+                (fs/which "open") (shell "open" local-url)
+                :else (println "Please open" local-url "in your web browser.")))))
     server))
 
 (defonce dev-server (atom nil))
 
-(comment
-  (clj-reload/reload)
+#_(clj-reload/reload)
 
-  (do (when-let [s @dev-server]
-        (print "Stopping server ... ")
-        (server/server-stop! s)
-        (println "stopped."))
-      (reset! dev-server (start! {:port 7984})))
+#_
+(do (when-let [s @dev-server]
+      (print "Stopping server ... ")
+      (server/server-stop! s)
+      (println "stopped."))
+    (reset! dev-server (start! {:port 7984
+                                :browse? true})))
 
-  :rcf)
+#_
+(do (when-let [s @dev-server]
+      (print "Stopping server ... ")
+      (server/server-stop! s)
+      (println "stopped."))
+    (reset! dev-server (start! {:port 7984})))
 
 #_(start! {:port 7108})
