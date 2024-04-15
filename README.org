@@ -1,7 +1,14 @@
-* How hard can it be to roll my own note taking system?
-:PROPERTIES:
-:CUSTOM_ID: how-hard-can-it-be-to-roll-my-own-note-taking-system
-:END:
+* Capture notes for weeknotes
+"What's weeknotes?" you say?
+Consider reading https://doingweeknotes.com/.
+
+When Friday has come and you sit down to write weeknotes, where to you start out?
+With a blank page?
+Or did you have the foresight to take some notes during the week?
+
+=weeknotes-notes= is built to let you take notes in order to write weeknotes.
+* 2024-04-13
+** How hard can it be to roll my own note taking system?
 
 I like to build the tools I use. I also like my website,
 [[https://play.teod.eu/][play.teod.eu]].
