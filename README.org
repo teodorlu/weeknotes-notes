@@ -7,6 +7,13 @@ With a blank page?
 Or did you have the foresight to take some notes during the week?
 
 =weeknotes-notes= is built to let you take notes in order to write weeknotes.
+
+It's up: https://weeknotes-notes.apps.garden/
+
+But there's no user isolation, so:
+
+1. Don't write things you don't want to be public forever
+2. Please don't abuse it :)
 * 2024-04-13
 ** How hard can it be to roll my own note taking system?
 
