@@ -51,7 +51,9 @@
   (prn [(:request-method req) (:uri req)])
   req)
 
-(def store (store/->FolderBackedEdnStore (fs/file (garden-storage) "edn-store")))
+(let [root (fs/file (garden-storage) "edn-store")]
+  (fs/create-dirs root)
+  (def store (store/->FolderBackedEdnStore root)))
 
 (defn wrapped-wrapped-app [req]
   (-> req
