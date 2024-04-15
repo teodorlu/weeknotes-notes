@@ -3,7 +3,7 @@
    [hiccup.page :as page]
    [teodorlu.weeknotes-notes.path :as path]))
 
-(defn index [_req]
+(defn write-a-note [_req]
   (list
    [:p "Write notes:"]
    [:form {:action path/submit-note}
@@ -18,4 +18,4 @@
     [:head
      [:meta {:charset "UTF-8"}]
      [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]]
-    [:body (index req)])})
+    [:body (write-a-note req)])})
