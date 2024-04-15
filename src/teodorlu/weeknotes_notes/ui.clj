@@ -6,7 +6,7 @@
 (defn write-a-note [_req]
   (list
    [:p "Write notes:"]
-   [:form {:action path/submit-note}
+   [:form {:action path/submit-note :method "post"}
     [:div [:textarea]]
     [:div [:input {:type "submit" :value "Submit note"}]]]))
 

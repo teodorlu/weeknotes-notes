@@ -30,10 +30,16 @@
      :body "Ready!"}
 
     (str "GET " path/root)
-    ui/page-index}))
+    ui/page-index
+
+    (str "POST " path/submit-note)
+    (fn [req]
+      {:status 200
+       :headers {"content-type" "text/html"}
+       :body "Submitted!"})}))
 
 (def wrapped-app
-  (-> app
+  (-> #'app
       ;; garden-email
       (ring.params/wrap-params)
       (garden-email/wrap-with-email #_{:on-receive (fn [email] (println "Got mail"))})
@@ -41,8 +47,17 @@
       (garden-id/wrap-auth #_{:github [{:team "nextjournal"}]})
       (session/wrap-session {:store (cookie-store)})))
 
+(defn log-request [req]
+  (prn [(:request-method req) (:uri req)])
+  req)
+
+(defn wrapped-wrapped-app [req]
+  (-> req
+      log-request
+      wrapped-app))
+
 (defn start! [opts]
-  (let [server (server/run-server #'wrapped-app
+  (let [server (server/run-server #'wrapped-wrapped-app
                                   (merge {:legacy-return-value? false
                                           :host "0.0.0.0"
                                           :port 7777}
