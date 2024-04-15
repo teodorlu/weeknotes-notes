@@ -4,12 +4,18 @@
    [teodorlu.weeknotes-notes.path :as path]
    [teodorlu.weeknotes-notes.store :as store]))
 
-(defn write-a-note [_req]
+(defn fragment-write-note [_req]
   (list
    [:p "Write notes:"]
    [:form {:action path/submit-note :method "post"}
     [:div [:textarea {:name path/submit-note-note-text-name}]]
     [:div [:input {:type "submit" :value "Submit note"}]]]))
+
+(defn fragment-list-notes [req]
+  (when-let [store (:weeknotes-notes/store req)]
+    [:ul
+     (for [uuid (store/list-uuids store)]
+       [:li uuid])]))
 
 (defn page-index [req]
   {:status 200
@@ -19,7 +25,9 @@
        [:head
         [:meta {:charset "UTF-8"}]
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]]
-     [:body (write-a-note req)])})
+       [:body
+        (fragment-write-note req)
+        (fragment-list-notes req)])})
 
 (def ^:private -submit-last-req (atom nil))
 
