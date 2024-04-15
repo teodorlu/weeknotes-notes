@@ -14,9 +14,11 @@
 
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
-    [:ul
-     (for [uuid (store/list-uuids store)]
-       [:li uuid])]))
+    (list
+     [:p "Here are all known notes:"]
+     [:ul
+      (for [uuid (store/list-uuids store)]
+        [:li uuid])])))
 
 (defn page-index [req]
   {:status 200
