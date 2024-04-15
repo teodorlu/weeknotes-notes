@@ -9,7 +9,8 @@
    [:p "Write notes:"]
    [:form {:action path/submit-note :method "post"}
     [:div [:textarea {:name path/submit-note-note-text-name}]]
-    [:div [:input {:type "submit" :value "Submit note"}]]]))
+    [:div [:input {:type "submit" :value "Submit note"}]]]
+   [:p "All notes are public. Don't write secrets!"]))
 
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
