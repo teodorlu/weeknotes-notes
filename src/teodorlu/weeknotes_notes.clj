@@ -44,8 +44,9 @@
                                           :host "0.0.0.0"
                                           :port 7777}
                                          opts))]
-    (println (format "server started: http://localhost:%s"
-                     (server/server-port server)))))
+    (println (format "Server started: http://localhost:%s"
+                     (server/server-port server)))
+    server))
 
 (defonce dev-server (atom nil))
 
@@ -53,8 +54,10 @@
   (clj-reload/reload)
 
   (do (when-let [s @dev-server]
-        (s))
-      (reset! dev-server (start! {:port 7196})))
+        (print "Stopping server ... ")
+        (server/server-stop! s)
+        (println "stopped."))
+      (reset! dev-server (start! {:port 7984})))
 
   :rcf)
 
