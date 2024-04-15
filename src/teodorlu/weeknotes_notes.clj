@@ -12,6 +12,7 @@
    [ring.middleware.session :as session]
    [ring.middleware.session.cookie :refer [cookie-store]]
    [teodorlu.weeknotes-notes.path :as path]
+   [teodorlu.weeknotes-notes.store :as store]
    [teodorlu.weeknotes-notes.ui :as ui]))
 
 ;; Design
@@ -50,9 +51,12 @@
   (prn [(:request-method req) (:uri req)])
   req)
 
+(def store (store/->FolderBackedEdnStore (fs/file (garden-storage) "edn-store")))
+
 (defn wrapped-wrapped-app [req]
   (-> req
       log-request
+      (assoc :weeknotes-notes/store store)
       wrapped-app))
 
 (defn start! [opts]
