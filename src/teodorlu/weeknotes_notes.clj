@@ -1,11 +1,14 @@
 (ns teodorlu.weeknotes-notes
   (:require
+   [clj-reload.core :as clj-reload]
+   [clj-simple-router.core :as clj-simple-router]
    [nextjournal.garden-email :as garden-email]
    [nextjournal.garden-id :as garden-id]
    [org.httpkit.server :as server]
    [ring.middleware.params :as ring.params]
    [ring.middleware.session :as session]
-   [ring.middleware.session.cookie :refer [cookie-store]]))
+   [ring.middleware.session.cookie :refer [cookie-store]]
+   [teodorlu.weeknotes-notes.path :as path]))
 
 ;; Design
 ;;
@@ -21,8 +24,11 @@
          :headers {"content-type" "text/html"}
          :body body))
 
+
 (defn app [req]
-  (html-response {} "OK!"))
+  (clj-simple-router/router
+   {(str "GET " path/root)
+    (html-response {} "OK!")}))
 
 (def wrapped-app
   (-> app
@@ -43,7 +49,8 @@
                      (server/server-port server)))))
 
 (comment
+  (clj-reload/reload)
   (def server (start! {:port 7196}))
-  )
+  :rcf)
 
 #_(start! {:port 7108})
