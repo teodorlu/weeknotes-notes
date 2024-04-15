@@ -26,10 +26,7 @@
 (def app
   (clj-simple-router/router
    {(str "HEAD " path/root)
-    (constantly
-     {:status 200
-      :headers {"content-type" "text/html"}
-      :body "Ready!"})
+    (constantly {:status 202})
 
     (str "GET " path/root)
     #'ui/page-index
