@@ -30,13 +30,12 @@
      :body "Ready!"}
 
     (str "GET " path/root)
-    ui/page-index
+    #'ui/page-index
 
     (str "POST " path/submit-note)
-    (fn [req]
-      {:status 200
-       :headers {"content-type" "text/html"}
-       :body "Submitted!"})}))
+    #'ui/page-submit-note
+
+    }))
 
 (def wrapped-app
   (-> #'app
@@ -74,8 +73,6 @@
 
 (defonce dev-server (atom nil))
 
-#_(clj-reload/reload)
-
 #_
 (do (when-let [s @dev-server]
       (print "Stopping server ... ")
@@ -92,3 +89,7 @@
     (reset! dev-server (start! {:port 7984})))
 
 #_(start! {:port 7108})
+
+(comment
+  (clj-reload/reload)
+  :rcf)
