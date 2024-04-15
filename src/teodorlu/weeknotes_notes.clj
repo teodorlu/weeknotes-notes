@@ -8,7 +8,8 @@
    [ring.middleware.params :as ring.params]
    [ring.middleware.session :as session]
    [ring.middleware.session.cookie :refer [cookie-store]]
-   [teodorlu.weeknotes-notes.path :as path]))
+   [teodorlu.weeknotes-notes.path :as path]
+   [teodorlu.weeknotes-notes.ui :as ui]))
 
 ;; Design
 ;;
@@ -18,17 +19,15 @@
 (defn garden-storage []
   (or (System/getenv "GARDEN_STORAGE") ".local/garden-storage"))
 
-(defn html-response [response body]
-  (assoc response
-         :status 200
-         :headers {"content-type" "text/html"}
-         :body body))
-
-
-(defn app [req]
+(def app
   (clj-simple-router/router
-   {(str "GET " path/root)
-    (html-response {} "OK!")}))
+   {(str "HEAD " path/root)
+    {:status 200
+     :headers {"content-type" "text/html"}
+     :body "Ready!"}
+
+    (str "GET " path/root)
+    ui/page-index}))
 
 (def wrapped-app
   (-> app
@@ -48,9 +47,15 @@
     (println (format "server started: http://localhost:%s"
                      (server/server-port server)))))
 
+(defonce dev-server (atom nil))
+
 (comment
   (clj-reload/reload)
-  (def server (start! {:port 7196}))
+
+  (do (when-let [s @dev-server]
+        (s))
+      (reset! dev-server (start! {:port 7196})))
+
   :rcf)
 
 #_(start! {:port 7108})
