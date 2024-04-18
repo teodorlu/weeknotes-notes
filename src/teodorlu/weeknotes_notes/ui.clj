@@ -1,4 +1,5 @@
 (ns teodorlu.weeknotes-notes.ui
+  {:deprecated true}
   (:require
    [hiccup.page :as page]
    [teodorlu.weeknotes-notes.path :as path]

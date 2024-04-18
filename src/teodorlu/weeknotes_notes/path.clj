@@ -1,4 +1,5 @@
-(ns teodorlu.weeknotes-notes.path)
+(ns teodorlu.weeknotes-notes.path
+    {:deprecated true})
 
 (def root "/")
 (def submit-note "/submit-note")

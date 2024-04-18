@@ -1,4 +1,5 @@
 (ns teodorlu.weeknotes-notes.assembly
+  {:deprecated true}
   (:require
    [babashka.fs :as fs]
    [babashka.process :refer [shell]]

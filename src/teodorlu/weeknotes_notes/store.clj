@@ -1,4 +1,5 @@
 (ns teodorlu.weeknotes-notes.store
+  {:deprecated true}
   (:require
    [babashka.fs :as fs]
    [clojure.edn :as edn]
