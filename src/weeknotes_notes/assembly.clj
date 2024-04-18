@@ -11,9 +11,9 @@
    [ring.middleware.params :as ring.params]
    [ring.middleware.session :as session]
    [ring.middleware.session.cookie :refer [cookie-store]]
-   [teodorlu.weeknotes-notes.path :as path]
-   [teodorlu.weeknotes-notes.store :as store]
-   [teodorlu.weeknotes-notes.ui :as ui]))
+   [weeknotes-notes.path :as path]
+   [weeknotes-notes.store :as store]
+   [weeknotes-notes.ui :as ui]))
 
 ;; Design
 ;;
