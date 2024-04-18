@@ -1,8 +1,8 @@
 (ns weeknotes-notes.ui
   (:require
    [hiccup.page :as page]
-   [teodorlu.weeknotes-notes.path :as path]
-   [teodorlu.weeknotes-notes.store :as store]))
+   [weeknotes-notes.path :as path]
+   [weeknotes-notes.store :as store]))
 
 (defn fragment-write-note [_req]
   (list
