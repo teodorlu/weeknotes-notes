@@ -1,9 +1,10 @@
 (ns weeknotes-notes.system
   (:require
+   [babashka.fs :as fs]
    [clojure.string :as str]
    [integrant.core :as ig]
-   [weeknotes-notes.store :as store]
-   [babashka.fs :as fs]))
+   [weeknotes-notes.assembly :as assembly]
+   [weeknotes-notes.store :as store]))
 
 ;; store
 ;;
@@ -34,8 +35,13 @@
   (store/->FolderBackedEdnStore root))
 
 (defmethod ig/init-key :weeknotes-notes/injected-app
-  [_ _]
-  "injected app")
+  [_ {:keys [store]}]
+  (fn [req]
+    (-> req
+        (assoc :weeknotes-notes/store store)
+        assembly/request-enter
+        assembly/wrapped-app
+        assembly/response-exit)))
 
 (defmethod ig/init-key :weeknotes-notes/http-server
   [_ _]
