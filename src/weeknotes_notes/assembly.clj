@@ -95,4 +95,6 @@
 
 (comment
   (clj-reload/reload)
+
+  (server/server-stop! @dev-server)
   :rcf)
