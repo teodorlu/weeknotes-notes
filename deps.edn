@@ -1,15 +1,15 @@
 {:paths ["src"]
  :deps {babashka/fs {:mvn/version "0.5.20"}
+        babashka/process {:mvn/version "0.5.22"}
         hiccup/hiccup {:mvn/version "2.0.0-RC3"}
         http-kit/http-kit {:mvn/version "2.8.0-SNAPSHOT"}
+        integrant/integrant {:mvn/version "0.8.1"}
+        integrant/repl {:mvn/version "0.3.3"}
         io.github.nextjournal/clerk {:mvn/version "0.15.957"}
         io.github.nextjournal/garden-cron {:git/sha "23d5af087f2c76cc884273883b18d30cb4fa4997"}
         io.github.nextjournal/garden-email {:git/sha "ca4e1d7f5fefba1501ebd83d71b9cf409cb94080"}
         io.github.nextjournal/garden-id {:git/sha "06b67b5cf77d4d0573975f6cbe9bb6d69cce60eb"}
         io.github.tonsky/clj-reload {:mvn/version "0.4.3"}
         io.github.tonsky/clj-simple-router {:mvn/version "0.1.0"}
-        ring/ring-core {:mvn/version "2.0.0-alpha1"}
-        babashka/process {:mvn/version "0.5.22"}
-        integrant/repl {:mvn/version "0.3.3"}
-        integrant/integrant {:mvn/version "0.8.1"}}
+        ring/ring-core {:mvn/version "2.0.0-alpha1"}}
  :aliases {:nextjournal/garden {:exec-fn weeknotes-notes.assembly/start!}}}
