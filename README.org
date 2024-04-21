@@ -115,3 +115,12 @@ Consistency is king!
 2. Fix problems that I can see!
 
 This fills me with encouragement rather than a fear that it's all too big.
+** 08:54 What do do, alternative 2?
+1. Try to use it for my goal (writing weeknotes)
+2. See where it fails first.
+
+Let's just do it.
+I now have a list of UUIDs.
+That's not enough!
+I need to read each.
+Let's make that happen.
