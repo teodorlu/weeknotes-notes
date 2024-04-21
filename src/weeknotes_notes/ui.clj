@@ -25,6 +25,10 @@
             #_#_
             note+meta (store/load-one store uuid)
             ;; it should be in a let!
+            ;;
+            ;; I introduced this bug while I was coding
+            ;; And I was in a REPL
+            ;; But I had not loaded the new code that introduced the bug 🙈
             ]
         (let [note+meta (store/load-one store uuid)]
           [:li
