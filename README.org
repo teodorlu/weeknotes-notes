@@ -135,3 +135,11 @@ Status:
 1. I've got the ig/init-key and ig/halt! methods working in =weeknotes-notes/system=
 2. I've been able to list the /content/ of weeknotes, not just their uuids
 3. In prod, the code still runs via the old entrypoints
+** I want integrant/repl in production.
+Why?
+Because then I can start and restart the stuff in production.
+Why?
+Because I want to be /able/ to experiment with it.
+
+Also, integrant/repl gives me structured access to system state, and system config.
+That access is super-helpful for debugging.
