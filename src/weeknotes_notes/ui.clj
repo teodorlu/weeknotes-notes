@@ -39,7 +39,6 @@
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]]
        [:body
         (fragment-write-note req)
-        #_
         (fragment-list-notes req)
         [:p "Source on Github: " [:a {:href path/github-source-url} path/github-shortname] "."]])})
 
