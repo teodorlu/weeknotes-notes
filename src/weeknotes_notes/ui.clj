@@ -15,21 +15,12 @@
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
     (list
-     [:p "Notes:"]
-     [:ul
-      (for [uuid (store/list-uuids store)]
-        [:li uuid])])))
-
-(defn fragment-show-all-notes [req]
-  (when-let [store (:weeknotes-notes/store req)]
-    (list
      [:p "Notes + content:"]
      [:ul
       (for [uuid (store/list-uuids store)]
         [:li
          [:p [:strong uuid]]
-         [:p ":P" ]])]))
-  )
+         [:p (store/load-one store uuid) ]])])))
 
 (defn page-index [req]
   {:status 200
