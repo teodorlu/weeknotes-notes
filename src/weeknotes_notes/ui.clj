@@ -15,12 +15,19 @@
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
     (list
+     ;; First, list active notes
      [:p "Notes + content:"]
      [:ul
-      (for [uuid (store/list-uuids store)]
+      (for [uuid (store/list-uuids store)
+            note+meta (store/load-one store uuid)]
         [:li
          [:p [:strong uuid]]
-         [:p (:note (store/load-one store uuid)) ]])])))
+         [:p (:note note+meta)]
+         [:p "hello"]
+         [:p [:pre (pr-str (dissoc note+meta :uuid :note))]]])]
+     ;; Then, list archived notes
+     [:p "Archived notes:"]
+     )))
 
 (defn page-index [req]
   {:status 200
