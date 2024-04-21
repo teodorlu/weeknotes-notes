@@ -13,21 +13,21 @@
 
 :weeknotes-notes/store
 :weeknotes-notes/injected-app
-:weeknotes.notes/http-server
+:weeknotes-notes/http-server
 
 (defn config-dev []
   (let [edn-store-root ".local/storage/edn-store"]
     (fs/create-dirs edn-store-root)
     {:weeknotes-notes/store {:root edn-store-root}
-     :weeknotes-notes/injected-app {}
-     :weeknotes.notes/http-server {:port 7984}}))
+     :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
+     :weeknotes-notes/http-server {:port 7984}}))
 
 (defn config-prod []
   (assert (not (str/blank? (System/getenv "GARDEN_STORAGE"))))
   {:weeknotes-notes/store {:root (str (System/getenv "GARDEN_STORAGE")
                                       "/edn-store")}
    :weeknotes-notes/injected-app {}
-   :weeknotes.notes/http-server {:port 7777}})
+   :weeknotes-notes/http-server {:port 7777}})
 
 (defmethod ig/init-key :weeknotes-notes/store
   [_ {:keys [root]}]
