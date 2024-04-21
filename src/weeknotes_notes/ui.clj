@@ -13,6 +13,8 @@
    [:p "For now, all notes are public. Don't write secrets!"]))
 
 (defn fragment-list-notes [req]
+  [:p "OK"]
+  #_
   (when-let [store (:weeknotes-notes/store req)]
     (list
      ;; First, list active notes
@@ -39,7 +41,6 @@
         [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]]
        [:body
         (fragment-write-note req)
-        #_
         (fragment-list-notes req)
         [:p "Source on Github: " [:a {:href path/github-source-url} path/github-shortname] "."]])})
 
