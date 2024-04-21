@@ -124,3 +124,14 @@ I now have a list of UUIDs.
 That's not enough!
 I need to read each.
 Let's make that happen.
+** I got myself distracted, and implemented integrant.
+Why?
+I realized that my reloads were flaky, and wanted a structured approach.
+I'm happy that I took this detour.
+It was getting annoying that I was able to get into weird states where I didn't understand what went wrong.
+
+Status:
+
+1. I've got the ig/init-key and ig/halt! methods working in =weeknotes-notes/system=
+2. I've been able to list the /content/ of weeknotes, not just their uuids
+3. In prod, the code still runs via the old entrypoints
