@@ -85,13 +85,6 @@
     (reset! dev-server (start! {:port 7984
                                 :browse? true})))
 
-#_
-(do (when-let [s @dev-server]
-      (print "Stopping server ... ")
-      (server/server-stop! s)
-      (println "stopped."))
-    (reset! dev-server (start! {:port 7984})))
-
 #_(start! {:port 7108})
 
 (comment
