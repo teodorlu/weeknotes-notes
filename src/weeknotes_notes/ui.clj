@@ -13,13 +13,12 @@
    [:p "For now, all notes are public. Don't write secrets!"]))
 
 (defn fragment-list-notes [req]
-  [:p "OK"]
-  #_
   (when-let [store (:weeknotes-notes/store req)]
     (list
      ;; First, list active notes
      [:p "Notes + content:"]
      [:ul
+      #_
       (for [uuid (store/list-uuids store)
             note+meta (store/load-one store uuid)]
         [:li
