@@ -3,6 +3,7 @@
    [babashka.fs :as fs]
    [clojure.string :as str]
    [integrant.core :as ig]
+   [org.httpkit.server :as httpkit]
    [weeknotes-notes.assembly :as assembly]
    [weeknotes-notes.store :as store]))
 
@@ -22,14 +23,16 @@
     (fs/create-dirs edn-store-root)
     {:weeknotes-notes/store {:root edn-store-root}
      :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
-     :weeknotes-notes/http-server {:port 7984}}))
+     :weeknotes-notes/http-server {:app (ig/ref :weeknotes-notes/injected-app)
+                                   :port 7984}}))
 
 (defn config-prod []
   (assert (not (str/blank? (System/getenv "GARDEN_STORAGE"))))
   {:weeknotes-notes/store {:root (str (System/getenv "GARDEN_STORAGE")
                                       "/edn-store")}
-   :weeknotes-notes/injected-app {}
-   :weeknotes-notes/http-server {:port 7777}})
+   :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
+   :weeknotes-notes/http-server {:app (ig/ref :weeknotes-notes/injected-app)
+                                 :port 7777}})
 
 (defmethod ig/init-key :weeknotes-notes/store
   [_ {:keys [root]}]
@@ -45,8 +48,16 @@
         assembly/response-exit)))
 
 (defmethod ig/init-key :weeknotes-notes/http-server
-  [_ _]
-  "http server")
+  [_ {:keys [port app]}]
+  (println "Server starting on " (str "http://localhost:" port))
+  (httpkit/run-server app
+                      {:legacy-return-value? false
+                       :host "0.0.0.0"
+                       :port port}))
+
+(defmethod ig/halt-key! :weeknotes-notes/http-server
+  [_ server]
+  (httpkit/server-stop! server))
 
 (comment
   (def mysys (ig/init (config-dev)))
