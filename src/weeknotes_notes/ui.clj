@@ -20,6 +20,17 @@
       (for [uuid (store/list-uuids store)]
         [:li uuid])])))
 
+(defn fragment-show-all-notes [req]
+  (when-let [store (:weeknotes-notes/store req)]
+    (list
+     [:p "Notes + content:"]
+     [:ul
+      (for [uuid (store/list-uuids store)]
+        [:li
+         [:p [:strong uuid]]
+         [:p ":P" ]])]))
+  )
+
 (defn page-index [req]
   {:status 200
    :headers {"content-type" "text/html"}
