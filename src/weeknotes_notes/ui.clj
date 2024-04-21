@@ -20,8 +20,12 @@
      [:p "Notes + content:"]
      [:ul
       (for [uuid (store/list-uuids store)
+            ;; found the bug!
+            ;; This is wrong 👇
             #_#_
-            note+meta (store/load-one store uuid)]
+            note+meta (store/load-one store uuid)
+            ;; it should be in a let!
+            ]
         [:li
          [:p [:strong uuid]]
          #_
