@@ -15,7 +15,7 @@
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
     (list
-     [:p "Here are all known notes:"]
+     [:p "Notes:"]
      [:ul
       (for [uuid (store/list-uuids store)]
         [:li uuid])])))
