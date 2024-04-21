@@ -6,15 +6,16 @@
    [weeknotes-notes.assembly :as assembly]
    [weeknotes-notes.store :as store]))
 
-;; store
-;;
-;; injected app
-;;
-;; http-server
+;; Our system components are:
 
 :weeknotes-notes/store
+;; a way to store EDN.
+
 :weeknotes-notes/injected-app
+;; an function from request to response, with required dependencies injected.
+
 :weeknotes-notes/http-server
+;; a real, running HTTP-server bound to a port.
 
 (defn config-dev []
   (let [edn-store-root ".local/storage/edn-store"]
@@ -53,4 +54,4 @@
 
   (store/list-uuids (:weeknotes-notes/store mysys))
 
-  )
+  :rcf)
