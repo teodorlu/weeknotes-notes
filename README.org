@@ -109,3 +109,9 @@ Perhaps bias towards doing, so perhaps do for most of the time, then timebox som
 
 I /should publish/ weeknotes today.
 Consistency is king!
+* 2024-04-21
+** 08:52 What to do?
+1. Open the app in production
+2. Fix problems that I can see!
+
+This fills me with encouragement rather than a fear that it's all too big.
