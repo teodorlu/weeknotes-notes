@@ -66,6 +66,23 @@
    {:request-method :get
     :uri "/"})
 
+  (defn xxx [req]
+    (def yyy req)
+
+    req)
+
+  yyy
+
+
+  (let [req {:request-method :get
+             :uri "/"}
+        store (:weeknotes-notes/store mysys)]
+    (-> req
+        (assoc :weeknotes-notes/store store)
+        xxx
+        assembly/wrapped-app)
+    )
+
 
 
   :rcf)
