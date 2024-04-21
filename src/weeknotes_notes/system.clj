@@ -1,6 +1,7 @@
 (ns weeknotes-notes.system
   (:require
-   [integrant.core :as ig]))
+   [integrant.core :as ig]
+   [clojure.string :as str]))
 
 ;; injected app
 ;;
@@ -8,10 +9,14 @@
 ;;
 ;; http-server
 
-(defmethod ig/init-key :weeknotes/config
-  [_ _]
-  {:garden-storage-path (or (System/getenv "GARDEN_STORAGE") ".local/garden-storage")
-   :port (if (System/getenv "GARDEN_STORAGE") 7777 7984)})
+(defn config-dev []
+  {:storage-path ".local/storage"
+   :port 7984})
+
+(defn config-prod []
+  (assert (not (str/blank? (System/getenv "GARDEN_STORAGE"))))
+  {:storage-path (System/getenv "GARDEN_STORAGE")
+   :port 7777})
 
 (defmethod ig/init-key :weeknotes/store
   [_ _])
