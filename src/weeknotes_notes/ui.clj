@@ -12,11 +12,8 @@
     [:div [:input {:type "submit" :value "Submit note"}]]]
    [:p "All notes are public. Don't write secrets!"]))
 
-(defonce s (atom nil))
-
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
-    (reset! s store)
     (list
      [:p "Notes + content:"]
      [:ul
@@ -24,10 +21,6 @@
         [:li
          [:p [:strong uuid]]
          [:p (:note (store/load-one store uuid)) ]])])))
-
-(let [store @s
-      uuid (first (store/list-uuids store))]
-  (store/load-one store uuid))
 
 (defn page-index [req]
   {:status 200
