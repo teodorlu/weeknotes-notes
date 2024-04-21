@@ -59,6 +59,7 @@
       (assoc :weeknotes-notes/store store)
       wrapped-app))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn start! [opts]
   (let [server (server/run-server #'wrapped-wrapped-app
                                   (merge {:legacy-return-value? false
@@ -75,6 +76,7 @@
                 :else (println "Please open" local-url "in your web browser.")))))
     server))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defonce dev-server (atom nil))
 
 #_
