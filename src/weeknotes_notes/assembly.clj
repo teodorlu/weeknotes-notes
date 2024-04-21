@@ -43,9 +43,15 @@
       (garden-id/wrap-auth #_{:github [{:team "nextjournal"}]})
       (session/wrap-session {:store (cookie-store)})))
 
-(defn log-request [req]
-  (prn [(:request-method req) (:uri req)])
-  req)
+(defn log-request [request]
+  (prn [(:request-method request) (:uri request)])
+  request)
+
+(defn request-enter [request]
+  (-> request log-request))
+
+(defn response-exit [response]
+  (-> response))
 
 (let [root (fs/file (core/garden-storage) "edn-store")]
   (fs/create-dirs root)
