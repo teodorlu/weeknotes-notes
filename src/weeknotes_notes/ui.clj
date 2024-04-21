@@ -26,13 +26,12 @@
             note+meta (store/load-one store uuid)
             ;; it should be in a let!
             ]
-        [:li
-         [:p [:strong uuid]]
-         #_
-         [:p (:note note+meta)]
-         [:p "hello"]
-         #_
-         [:p [:pre (pr-str (dissoc note+meta :uuid :note))]]])]
+        (let [note+meta (store/load-one store uuid)]
+          [:li
+           [:p [:strong uuid]]
+           [:p (:note note+meta)]
+           [:p "hello"]
+           [:p [:pre (pr-str (dissoc note+meta :uuid :note))]]]))]
      ;; Then, list archived notes
      [:p "Archived notes:"]
      )))
