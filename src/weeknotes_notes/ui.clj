@@ -38,6 +38,14 @@
             ;;
             ;; - It's super-useful to be able to run something like clj-reload
             ;;   to sync files and REPL.
+            ;;
+            ;; Actions:
+            ;;
+            ;; - Tests -- I don't want to write those for now.
+            ;;
+            ;; - REPL state / files sync: I want to address that now. First
+            ;;   integrant and integrant/repl. Then use integrant/repl and
+            ;;   clj-reload together.
             ]
         (let [note+meta (store/load-one store uuid)]
           [:li
