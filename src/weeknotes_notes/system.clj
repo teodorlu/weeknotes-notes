@@ -41,7 +41,7 @@
     (-> req
         (assoc :weeknotes-notes/store store)
         assembly/request-enter
-        assembly/wrapped-app ;; it crashes here
+        assembly/wrapped-app
         assembly/response-exit)))
 
 (defmethod ig/init-key :weeknotes-notes/http-server
