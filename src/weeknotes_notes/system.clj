@@ -6,38 +6,6 @@
    [weeknotes-notes.assembly :as assembly]
    [weeknotes-notes.store :as store]))
 
-
-
-
-
-
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; THIS NAMESPACE IS NOT YET WORKING AND IS NOT YET IN USE
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; THERE's A BUG!
-;;
-;; SEE THE (comment ,,,) FROM AT THE END OF THE FILE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ;; Our system components are:
 
 :weeknotes-notes/store
@@ -97,29 +65,5 @@
   ((:weeknotes-notes/injected-app mysys)
    {:request-method :get
     :uri "/"})
-
-  (defn xxx [req]
-    (def yyy req)
-
-    req)
-
-  yyy
-
-
-  (let [req {:request-method :get
-             :uri "/"}
-        store (:weeknotes-notes/store mysys)]
-    (-> req
-        (assoc :weeknotes-notes/store store)
-        xxx
-        assembly/wrapped-app)
-
-
-    )
-
-  (assembly/wrapped-wrapped-app {:request-method :get
-                                 :uri "/"})
-
-
 
   :rcf)
