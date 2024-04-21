@@ -17,7 +17,7 @@
                             ))
     )
   (let [opts (merge {:port 7984
-                     :storage-dir})]))
+                     :storage-dir ""})]))
 
 ;; 1. I can pass additional arguments to clojure -X
 ;;
