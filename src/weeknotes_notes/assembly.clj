@@ -11,6 +11,7 @@
    [ring.middleware.params :as ring.params]
    [ring.middleware.session :as session]
    [ring.middleware.session.cookie :refer [cookie-store]]
+   [weeknotes-notes.core :as core]
    [weeknotes-notes.path :as path]
    [weeknotes-notes.store :as store]
    [weeknotes-notes.ui :as ui]))
@@ -19,9 +20,6 @@
 ;;
 ;; - a text field for putting weeknotes
 ;; - a way to extract this week's weeknotes in org-mode or markdown
-
-(defn garden-storage []
-  (or (System/getenv "GARDEN_STORAGE") ".local/garden-storage"))
 
 (def app
   (clj-simple-router/router
@@ -49,7 +47,7 @@
   (prn [(:request-method req) (:uri req)])
   req)
 
-(let [root (fs/file (garden-storage) "edn-store")]
+(let [root (fs/file (core/garden-storage) "edn-store")]
   (fs/create-dirs root)
   (def store (store/->FolderBackedEdnStore root)))
 
