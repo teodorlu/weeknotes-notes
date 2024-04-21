@@ -2,7 +2,8 @@
   (:require
    [clojure.string :as str]
    [integrant.core :as ig]
-   [weeknotes-notes.store :as store]))
+   [weeknotes-notes.store :as store]
+   [babashka.fs :as fs]))
 
 ;; store
 ;;
@@ -15,9 +16,11 @@
 :weeknotes.notes/http-server
 
 (defn config-dev []
-  {:weeknotes-notes/store {:root ".local/storage/edn-store"}
-   :weeknotes-notes/injected-app {}
-   :weeknotes.notes/http-server {:port 7984}})
+  (let [edn-store-root ".local/storage/edn-store"]
+    (fs/create-dirs edn-store-root)
+    {:weeknotes-notes/store {:root edn-store-root}
+     :weeknotes-notes/injected-app {}
+     :weeknotes.notes/http-server {:port 7984}}))
 
 (defn config-prod []
   (assert (not (str/blank? (System/getenv "GARDEN_STORAGE"))))
