@@ -35,21 +35,13 @@
   [_ {:keys [root]}]
   (store/->FolderBackedEdnStore root))
 
-(defn hello [x msg]
-  (prn msg)
-  x)
-
 (defmethod ig/init-key :weeknotes-notes/injected-app
   [_ {:keys [store]}]
   (fn [req]
     (-> req
-        (hello 1)
         (assoc :weeknotes-notes/store store)
-        (hello 2)
         assembly/request-enter
-        (hello 3)
         assembly/wrapped-app ;; it crashes here
-        (hello 4)
         assembly/response-exit)))
 
 (defmethod ig/init-key :weeknotes-notes/http-server
