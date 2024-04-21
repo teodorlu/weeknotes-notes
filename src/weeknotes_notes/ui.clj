@@ -29,6 +29,15 @@
             ;; I introduced this bug while I was coding
             ;; And I was in a REPL
             ;; But I had not loaded the new code that introduced the bug 🙈
+            ;;
+            ;; Lessons:
+            ;;
+            ;; - Tests are useful, I currently hand-roll all the logic assuming
+            ;;   I won't write bugs. That's a half-decent assuption /up to some point/.
+            ;;   After reaching that point, guardrails / structure is required.
+            ;;
+            ;; - It's super-useful to be able to run something like clj-reload
+            ;;   to sync files and REPL.
             ]
         (let [note+meta (store/load-one store uuid)]
           [:li
