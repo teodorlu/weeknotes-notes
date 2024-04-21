@@ -14,7 +14,6 @@
 
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
-    (prn store)
     (list
      ;; First, list active notes
      [:p "Notes + content:"]
