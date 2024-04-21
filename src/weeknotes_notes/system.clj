@@ -6,6 +6,38 @@
    [weeknotes-notes.assembly :as assembly]
    [weeknotes-notes.store :as store]))
 
+
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; THIS NAMESPACE IS NOT YET WORKING AND IS NOT YET IN USE
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; THERE's A BUG!
+;;
+;; SEE THE (comment ,,,) FROM AT THE END OF THE FILE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;; Our system components are:
 
 :weeknotes-notes/store
@@ -81,7 +113,12 @@
         (assoc :weeknotes-notes/store store)
         xxx
         assembly/wrapped-app)
+
+
     )
+
+  (assembly/wrapped-wrapped-app {:request-method :get
+                                 :uri "/"})
 
 
 
