@@ -3,6 +3,7 @@
    [babashka.fs :as fs]
    [integrant.core :as ig]
    [org.httpkit.server :as httpkit]
+   [weeknotes-notes.core :as core]
    [weeknotes-notes.assembly :as assembly]
    [weeknotes-notes.store :as store]))
 
@@ -42,16 +43,8 @@
   [_ server]
   (httpkit/server-stop! server))
 
-(defn default-config []
-  (let [edn-store-root ".local/storage/edn-store"]
-    (fs/create-dirs edn-store-root)
-    {:weeknotes-notes/store {:root edn-store-root}
-     :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
-     :weeknotes-notes/http-server {:app (ig/ref :weeknotes-notes/injected-app)
-                                   :port 7984}}))
-
 (comment
-  (def mysys (ig/init (default-config)))
+  (def mysys (ig/init (core/default-config)))
   (ig/halt! mysys)
 
   (store/list-uuids (:weeknotes-notes/store mysys))

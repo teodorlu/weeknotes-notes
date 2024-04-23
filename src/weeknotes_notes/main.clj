@@ -1,8 +1,8 @@
 (ns weeknotes-notes.main
   (:require
-   [weeknotes-notes.system :as system]
    [clojure.string :as str]
-   [integrant.core :as ig]))
+   [integrant.core :as ig]
+   [weeknotes-notes.core :as core]))
 
 ;; Production main entrypoint
 ;; `deps.edn` refers here
@@ -13,7 +13,7 @@
   [opts]
   (require 'weeknotes-notes.system)
   (let [config
-        (cond-> (system/default-config)
+        (cond-> (core/default-config)
           (not (str/blank? (System/getenv "GARDEN_STORAGE")))
           (assoc-in [:weeknotes-notes/store :root]
                     (str (System/getenv "GARDEN_STORAGE")
