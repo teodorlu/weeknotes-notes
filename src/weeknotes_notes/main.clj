@@ -1,31 +1,23 @@
-(ns weeknotes-notes.main)
+(ns weeknotes-notes.main
+  (:require
+   [weeknotes-notes.system :as system]
+   [clojure.string :as str]
+   [integrant.core :as ig]))
 
-;; I want this to be the entrypoint.
-;;
-;; It should be called with
-;;
-;;     clojure -X weeknotes-notes.main/start!
-;;
-;; ... or?
-(defn start! [opts]
-  (cond-> opts
-    (not (:port opts))
-    (assoc :port 7984)
+;; Production main entrypoint
+;; `deps.edn` refers here
 
-    (not (:storage-dir opts))
-    (assoc :storage-dir (or (System/getenv "GARDEN_STORAGE")
-                            ))
-    )
-  (let [opts (merge {:port 7984
-                     #_#_
-                     :storage-dir ""})]))
-
-;; 1. I can pass additional arguments to clojure -X
-;;
-;; 2. I can use environment variables as an override.
-;;    I can respect that override locally, and defualt to something that works when that override is not set.
-
-;; Therefore, I can write a system that /returns the config/
-;; That function can take options (overrides).
-;;
-;; 🤔
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn main
+  "Application entrypoint for use with clojure -X"
+  [opts]
+  (require 'weeknotes-notes.system)
+  (let [config
+        (cond-> (system/default-config)
+          (not (str/blank? (System/getenv "GARDEN_STORAGE")))
+          (assoc-in [:weeknotes-notes/store :root]
+                    (str (System/getenv "GARDEN_STORAGE")
+                         "/edn-store"))
+          (:port opts)
+          (assoc-in [:weeknotes-notes/http-server :port] (:port opts)))]
+    (ig/init config)))

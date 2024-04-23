@@ -1,7 +1,6 @@
 (ns weeknotes-notes.system
   (:require
    [babashka.fs :as fs]
-   [clojure.string :as str]
    [integrant.core :as ig]
    [org.httpkit.server :as httpkit]
    [weeknotes-notes.assembly :as assembly]
@@ -17,22 +16,6 @@
 
 :weeknotes-notes/http-server
 ;; a real, running HTTP-server bound to a port.
-
-(defn config-dev []
-  (let [edn-store-root ".local/storage/edn-store"]
-    (fs/create-dirs edn-store-root)
-    {:weeknotes-notes/store {:root edn-store-root}
-     :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
-     :weeknotes-notes/http-server {:app (ig/ref :weeknotes-notes/injected-app)
-                                   :port 7984}}))
-
-(defn config-prod []
-  (assert (not (str/blank? (System/getenv "GARDEN_STORAGE"))))
-  {:weeknotes-notes/store {:root (str (System/getenv "GARDEN_STORAGE")
-                                      "/edn-store")}
-   :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
-   :weeknotes-notes/http-server {:app (ig/ref :weeknotes-notes/injected-app)
-                                 :port 7777}})
 
 (defmethod ig/init-key :weeknotes-notes/store
   [_ {:keys [root]}]
@@ -59,14 +42,18 @@
   [_ server]
   (httpkit/server-stop! server))
 
+(defn default-config []
+  (let [edn-store-root ".local/storage/edn-store"]
+    (fs/create-dirs edn-store-root)
+    {:weeknotes-notes/store {:root edn-store-root}
+     :weeknotes-notes/injected-app {:store (ig/ref :weeknotes-notes/store)}
+     :weeknotes-notes/http-server {:app (ig/ref :weeknotes-notes/injected-app)
+                                   :port 7984}}))
+
 (comment
-  (def mysys (ig/init (config-dev)))
+  (def mysys (ig/init (default-config)))
   (ig/halt! mysys)
 
   (store/list-uuids (:weeknotes-notes/store mysys))
-
-  ((:weeknotes-notes/injected-app mysys)
-   {:request-method :get
-    :uri "/"})
 
   :rcf)
