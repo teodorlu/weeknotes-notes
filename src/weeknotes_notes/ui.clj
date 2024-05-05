@@ -15,9 +15,7 @@
 (defn fragemnt-note [note+meta]
   [:li
    [:p [:strong (:uuid note+meta)]]
-   [:p (:note note+meta)]
-   [:p "hello"]
-   [:p [:pre (pr-str (dissoc note+meta :uuid :note))]]])
+   [:p (:note note+meta)]])
 
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
