@@ -4,6 +4,20 @@
    [weeknotes-notes.path :as path]
    [weeknotes-notes.store :as store]))
 
+(defn parse-note
+  "A weeknote-note is a heading followed by zero or more paragraphs.
+
+  Example:
+
+    I like using a REPL!
+
+    It feels like programming, not doing arbitrary stuff to follow arbitrary
+    rules. I don't like arbitrary rules.
+
+    Yet, sometimes I make a mess for myself. In those cases, I need to clean up
+    my mess."
+  [text])
+
 (defn fragment-write-weeknotes-note [_req]
   (list
    [:h2 "Write weeknotes-notes"]
