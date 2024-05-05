@@ -13,18 +13,18 @@
    [:p "For now, all notes are public. Don't write secrets!"]))
 
 (defn fragemnt-note [note+meta]
-  [:li
-   [:p [:strong (:uuid note+meta)]]
-   [:p (:note note+meta)]])
+  (list
+   [:p [:code (:uuid note+meta)]]
+   [:p (:note note+meta)]))
 
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
     (list
      [:h2 "All weeknotes-note"]
-     [:ul
-      (for [uuid (store/list-uuids store)]
-        (let [note+meta (store/load-one store uuid)]
-          (fragemnt-note note+meta)))])))
+     (interpose [:hr]
+                 (for [uuid (store/list-uuids store)]
+                   (let [note+meta (store/load-one store uuid)]
+                     (fragemnt-note note+meta)))))))
 
 (defn page-index [req]
   {:status 200
