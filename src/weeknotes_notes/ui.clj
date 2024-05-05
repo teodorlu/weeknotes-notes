@@ -10,7 +10,7 @@
    [:form {:action path/submit-note :method "post"}
     [:div [:textarea {:name path/submit-note-note-text-name}]]
     [:div [:input {:type "submit" :value "Submit note"}]]]
-   [:p "For now, all notes are public. Don't write secrets!"]))
+   [:p "For now, all notes are public. Don't write secret notes!"]))
 
 (defn fragemnt-weeknotes-note [note+meta]
   (list
