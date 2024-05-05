@@ -4,15 +4,15 @@
    [weeknotes-notes.path :as path]
    [weeknotes-notes.store :as store]))
 
-(defn fragment-write-note [_req]
+(defn fragment-write-weeknotes-note [_req]
   (list
-   [:h2 "Write notes"]
+   [:h2 "Write weeknotes-notes"]
    [:form {:action path/submit-note :method "post"}
     [:div [:textarea {:name path/submit-note-note-text-name}]]
     [:div [:input {:type "submit" :value "Submit note"}]]]
    [:p "For now, all notes are public. Don't write secrets!"]))
 
-(defn fragemnt-note [note+meta]
+(defn fragemnt-weeknotes-note [note+meta]
   (list
    [:p [:code (:uuid note+meta)]]
    [:p (:note note+meta)]))
@@ -20,11 +20,11 @@
 (defn fragment-list-notes [req]
   (when-let [store (:weeknotes-notes/store req)]
     (list
-     [:h2 "All weeknotes-note"]
+     [:h2 "All weeknotes-notes"]
      (interpose [:hr]
                  (for [uuid (store/list-uuids store)]
                    (let [note+meta (store/load-one store uuid)]
-                     (fragemnt-note note+meta)))))))
+                     (fragemnt-weeknotes-note note+meta)))))))
 
 (defn page-index [req]
   {:status 200
@@ -37,7 +37,7 @@
        [:body
         [:h1 "Weeknotes-notes"]
         [:p "Notes for writing your weeknotes could be written here."]
-        (fragment-write-note req)
+        (fragment-write-weeknotes-note req)
         (fragment-list-notes req)
         [:h2 "References"]
         [:p "Source on Github: " [:a {:href path/github-source-url} path/github-shortname] "."]])})
