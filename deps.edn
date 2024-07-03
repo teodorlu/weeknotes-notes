@@ -6,8 +6,7 @@
         integrant/integrant {:mvn/version "0.10.0"}
         integrant/repl {:mvn/version "0.3.3"}
         io.github.nextjournal/clerk {:mvn/version "0.16.1016"}
-        io.github.nextjournal/garden-cron {:git/sha "2873ed17337b2e00d4f776b8093832c1f490a46e"
-                                           :git/url "https://github.com/nextjournal/garden-cron"}
+        io.github.nextjournal/garden-cron {:git/sha "2873ed17337b2e00d4f776b8093832c1f490a46e"}
         io.github.nextjournal/garden-email {:git/sha "ca4e1d7f5fefba1501ebd83d71b9cf409cb94080"}
         io.github.nextjournal/garden-id {:git/sha "06b67b5cf77d4d0573975f6cbe9bb6d69cce60eb"}
         io.github.tonsky/clj-reload {:mvn/version "0.7.1"}
